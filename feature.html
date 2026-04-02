@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Modern Home</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --bg: #ffffff;
+            --text: #1f2937;
+            --card-bg: #ffffff;
+            --nav-bg: rgba(255, 255, 255, 0.8);
+        }
+
+        [data-theme="dark"] {
+            --primary: #60a5fa;
+            --bg: #0f172a;
+            --text: #f8fafc;
+            --card-bg: #1e293b;
+            --nav-bg: rgba(15, 23, 42, 0.8);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui, sans-serif;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* Glassmorphism Nav */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 10%;
+            background: var(--nav-bg);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(125, 125, 125, 0.2);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            list-style: none;
+        }
+
+        .nav-links li { margin-left: 25px; }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        /* Theme Toggle Button */
+        #theme-toggle {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            margin-left: 20px;
+        }
+
+        /* Hero with Parallax feel */
+        .hero {
+            height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 10%;
+            background: radial-gradient(circle at top right, rgba(37, 99, 235, 0.1), transparent);
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+
+        .hero span {
+            color: var(--primary);
+        }
+
+        /* Animated Feature Cards */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            padding: 5rem 10%;
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(125, 125, 125, 0.1);
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 4px; height: 100%;
+            background: var(--primary);
+        }
+
+        footer {
+            padding: 3rem;
+            text-align: center;
+            border-top: 1px solid rgba(125, 125, 125, 0.1);
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">Nexus</div>
+        <ul class="nav-links">
+            <li><a href="#">Product</a></li>
+            <li><a href="#">Solutions</a></li>
+            <li><a href="#">Pricing</a></li>
+            <button id="theme-toggle">Switch Theme</button>
+        </ul>
+    </nav>
+
+    <header class="hero">
+        <h1>Building the <span>Digital</span> Experience of 2026</h1>
+        <p style="max-width: 600px; opacity: 0.8; margin-bottom: 2rem;">
+            A sophisticated starting point for your next big project. Fully responsive, 
+            dark-mode ready, and optimized for performance.
+        </p>
+        <div style="display: flex; gap: 15px;">
+            <a href="#" class="btn" style="background: var(--primary); color: white; padding: 15px 30px; border-radius: 30px; text-decoration: none; font-weight: bold;">Launch Project</a>
+            <a href="#" style="color: var(--text); padding: 15px 30px; text-decoration: none;">View Demo →</a>
+        </div>
+    </header>
+
+    <section class="features">
+        <div class="card">
+            <h3>Smart Logic</h3>
+            <p>Our backend systems adapt to your users' behavior in real-time.</p>
+        </div>
+        <div class="card">
+            <h3>Global Edge</h3>
+            <p>Deploy your content to over 300 nodes worldwide instantly.</p>
+        </div>
+        <div class="card">
+            <h3>Secure Core</h3>
+            <p>Enterprise-grade encryption baked into every layer of the stack.</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Nexus Framework. Built with passion.</p>
+    </footer>
+
+    <script>
+        const toggleBtn = document.getElementById('theme-toggle');
+        const body = document.documentElement;
+
+        toggleBtn.addEventListener('click', () => {
+            if (body.getAttribute('data-theme') === 'dark') {
+                body.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+
+        // Check for saved user preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') body.setAttribute('data-theme', 'dark');
+    </script>
+
+</body>
+</html>
